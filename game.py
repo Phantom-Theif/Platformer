@@ -4,13 +4,13 @@ import sys
 import random
 import time
 import os
-os.chdir("C:\Platformer-main")
+os.chdir("c:\One Cheek")
 pygame.init()
 vec = pygame.math.Vector2 #2 for two dimensional
 
 
-HEIGHT = 450
-WIDTH = 400
+HEIGHT = 600
+WIDTH = 800
 ACC = 0.5
 FRIC = -0.12
 FPS = 60
@@ -26,17 +26,29 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.image.load("standing.png")
         self.walkRight = [pygame.image.load('R1.png'),#index 0
                 pygame.image.load('R2.png'),
+                pygame.image.load('R2.png'),
+                pygame.image.load('R3.png'),
                 pygame.image.load('R3.png'),
                 pygame.image.load('R4.png'),
+                pygame.image.load('R4.png'),
+                pygame.image.load('R5.png'),
                 pygame.image.load('R5.png'),
                 pygame.image.load('R6.png'),
+                pygame.image.load('R6.png'),
+                pygame.image.load('R7.png'),
                 pygame.image.load('R7.png'),]
         self.walkLeft = [pygame.image.load('L1.png'),
                 pygame.image.load('L2.png'),
+                pygame.image.load('L2.png'),
+                pygame.image.load('L3.png'),
                 pygame.image.load('L3.png'),
                 pygame.image.load('L4.png'),
+                pygame.image.load('L4.png'),
+                pygame.image.load('L5.png'),
                 pygame.image.load('L5.png'),
                 pygame.image.load('L6.png'),
+                pygame.image.load('L6.png'),
+                pygame.image.load('L7.png'),
                 pygame.image.load('L7.png'),]
         self.rect = self.surf.get_rect()
         self.index = 0
@@ -54,13 +66,13 @@ class Player(pygame.sprite.Sprite):
             self.acc.x = -ACC
             self.surf = self.walkLeft[self.index]
             self.index += 1
-            if self.index > 6:
+            if self.index > 12:
                 self.index = 0
         if pressed_keys[K_RIGHT]:
             self.acc.x = ACC
             self.surf = self.walkRight[self.index]
             self.index += 1
-            if self.index > 6:
+            if self.index > 12:
                 self.index = 0  
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc
@@ -189,13 +201,6 @@ while True:
                 if event.key == pygame.K_SPACE:
                     P1.cancel_jump()
     plat_gen()
-    
-    if P1.rect.top <= HEIGHT/3:
-        P1.pos.y += abs(P1.vel.y)
-        for plat in platforms:
-            plat.rect.y += abs(P1.vel.y)
-            if plat.rect.top >= HEIGHT:
-                plat.kill()
 
     if P1.rect.top > HEIGHT:
         for entity in all_sprites:
